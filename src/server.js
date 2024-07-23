@@ -50,7 +50,11 @@ server.put('/:file/:id', async (request, reply) => {
 server.listen({
   port: 3333, // Define a porta onde o servidor ouvirá as requisições.
   host: '0.0.0.0' // Define o host como '0.0.0.0', que faz o servidor escutar em todas as interfaces de rede.
-}, () => {
+}, (err, address) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
   // Callback que é executado quando o servidor começa a escutar requisições.
-  console.log(`Server is running on ${server.server.address().address}:${server.server.address().port}`);
+  console.log(`Server is running on ${address}`);
 });
