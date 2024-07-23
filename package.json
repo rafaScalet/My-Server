@@ -12,7 +12,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "fastify": "^4.28.1",
-    "fs": "^0.0.1-security"
+    "fastify": "^4.28.1"
   }
 }
