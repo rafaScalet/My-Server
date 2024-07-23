@@ -46,6 +46,23 @@ server.put('/:file/:id', async (request, reply) => {
   }
 });
 
+server.delete('/:file/:id', async (request, reply) => {
+  const tableName = request.params.file; // Obtém o nome da tabela e passada na URL.
+  const table = tables[tableName]; // Obtém a referência ao array de dados correspondente ao arquivo.
+
+  const id = parseInt(request.params.id, 10); // Obtém o ID do registro passado na URL.
+
+  const data = request.body; // Obtém os dados enviados na requisição.
+
+  // Verifica se o ID é válido.
+  if (id >= 1 && id <= table.length) {
+    table.splice(id - 1, 1); // Remove o registro com o ID especificado.
+    reply.status(204).send(); // Resposta de sucesso.
+  } else {
+    reply.status(404).send(); // Resposta de erro.
+  }
+});
+
 // Inicia o servidor Fastify na porta 3000 e no host '0.0.0.0'.
 server.listen({
   port: 3333, // Define a porta onde o servidor ouvirá as requisições.
