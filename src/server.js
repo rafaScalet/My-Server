@@ -1,14 +1,15 @@
-import { addData, deleteData, editData, listData } from './routes.js';
+import * as func from './route/func.js';
 import fastify  from 'fastify';
 
 // Criar uma instância do Fastify com logs ativados.
 const server = fastify({ logger: true  });
 
 // Definindo um endpoint para listar todos os dados do array vacina.
-server.get('/:file', listData);
-server.post('/:file', addData);
-server.put('/:file/:id', editData);
-server.delete('/:file/:id', deleteData);
+server.get('/:dbName', func.list);
+server.get('/:dbName/:tableName', func.list);
+server.post('/:dbName', func.save);
+server.put('/:dbName/:id', func.edit);
+server.delete('/:dbName/:id', func.drop);
 
 // Inicia o servidor Fastify na porta 3000 e no host '0.0.0.0'.
 server.listen({

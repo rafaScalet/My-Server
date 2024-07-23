@@ -1,11 +1,18 @@
-export const tables = {
-  vacinados: [], // Array para armazenar os dados dos vacinados.
+export const dbs = {
+  vacinados: {
+    contact: [
+      { teste: "teste"}
+    ],
+    type: []
+  }, // Array para armazenar os dados dos vacinados.
   castrados: [], // Array para armazenar os dados dos castrados.
 }
 
-export function setTableName (request) {
-  const tableName = request.params.file; // Obtém o nome da tabela passado na URL.
-  const table = tables[tableName]; // Obtém a referência ao array de dados correspondente ao arquivo
+export default function setDb (request) {
+  const {dbName, tableName} = request.params; // Obtém o nome da tabela passado na URL.
 
-  return table; // Retorna a referência ao array de dados correspondente ao arquivo.
+  if (tableName) {
+    return dbs[dbName][tableName]; // Retorna a referência ao array de dados correspondente à tabela.
+  }
+  return dbs[dbName]; // Retorna a referência ao array de dados correspondente ao arquivo.
 }
