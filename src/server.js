@@ -12,7 +12,7 @@ server.delete('/:file/:id', deleteData);
 
 // Inicia o servidor Fastify na porta 3000 e no host '0.0.0.0'.
 server.listen({
-  port: 3333, // Define a porta onde o servidor ouvirá as requisições.
+  port: process.env.PORT ?? 3333, // Define a porta onde o servidor ouvirá as requisições.
   host: '0.0.0.0' // Define o host como '0.0.0.0', que faz o servidor escutar em todas as interfaces de rede.
 }, (err, address) => {
   if (err) {
