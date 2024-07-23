@@ -17,6 +17,18 @@ server.get('/:file', (request, reply) => {
   reply.status(200).send(db);
 });
 
+// Definindo um endpoint para adicionar dados ao array vacina.
+server.post('/:file', async (request, reply) => {
+  const dbName = request.params.file; // Obtém o nome do arquivo passado na URL.
+  const db = tables[dbName]; // Obtém a referência ao array de dados correspondente ao arquivo.
+
+  const data = request.body; // Obtém os dados enviados na requisição.
+
+  db.push(data); // Adiciona os dados ao array de vacina.
+
+  reply.status(201).send(); // Retorna um status 201 (Created) para indicar que os dados foram criados.
+});
+
 // Inicia o servidor Fastify na porta 3000 e no host '0.0.0.0'.
 server.listen({
   port: 3333, // Define a porta onde o servidor ouvirá as requisições.
