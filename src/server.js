@@ -10,21 +10,21 @@ const server = fastify({ logger: true  });
 
 // Definindo um endpoint para listar todos os dados do array vacina.
 server.get('/:file', (request, reply) => {
-  const dbName = request.params.file; // Obtém o nome do arquivo passado na URL.
-  const db = tables[dbName]; // Obtém a referência ao array de dados correspondente ao arquivo.
+  const tableName = request.params.file; // Obtém o nome da tabela passado na URL.
+  const table = tables[tableName]; // Obtém a referência ao array de dados correspondente ao arquivo.
 
   // Retorna os dados do array de vacina.
-  reply.status(200).send(db);
+  reply.status(200).send(table);
 });
 
 // Definindo um endpoint para adicionar dados ao array vacina.
 server.post('/:file', async (request, reply) => {
-  const dbName = request.params.file; // Obtém o nome do arquivo passado na URL.
-  const db = tables[dbName]; // Obtém a referência ao array de dados correspondente ao arquivo.
+  const tableName = request.params.file; // Obtém o nome da tabela passado na URL.
+  const table = tables[tableName]; // Obtém a referência ao array de dados correspondente ao arquivo.
 
   const data = request.body; // Obtém os dados enviados na requisição.
 
-  db.push(data); // Adiciona os dados ao array de vacina.
+  table.push(data); // Adiciona os dados ao array de vacina.
 
   reply.status(201).send(); // Retorna um status 201 (Created) para indicar que os dados foram criados.
 });
