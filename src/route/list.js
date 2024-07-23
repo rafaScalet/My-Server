@@ -1,7 +1,23 @@
-import setDb from '../db.js';
+import setInputs from '../db.js';
 
 export function list (request, reply) {
-  const data = setDb(request); // Obtém a referência ao array de dados correspondente ao arquivo.
+  const { dbs, dbName, tableName, id } = setInputs(request);
 
-  reply.status(200).send(data); // Retorna os dados do array de vacina que correspondem ao ID passado na URL
+  if (!(id >= 1 && id <= dbs[dbName][tableName].length)) {
+    if (!id) {
+      if (!tableName) {
+        if (!dbName) {
+          reply.status(200).send(dbs);
+        } else {
+          reply.status(200).send(dbs[dbName]);
+        }
+      } else {
+        reply.status(200).send(dbs[dbName][tableName]);
+      }
+    } else {
+      reply.status(404).send();
+    }
+  } else {
+    reply.status(200).send(dbs[dbName][tableName][id - 1]);
+  }
 }

@@ -1,4 +1,4 @@
-import setDb from '../db.js';
+import setInputs from '../db.js';
 
 export function edit (request, reply) {
   const table = setDb(request); // Obtém a referência ao array de dados correspondente ao arquivo.

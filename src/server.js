@@ -5,6 +5,7 @@ import fastify  from 'fastify';
 const server = fastify({ logger: true  });
 
 // Definindo um endpoint para listar todos os dados do array vacina.
+server.get('/', func.list);
 server.get('/:dbName', func.list);
 server.get('/:dbName/:tableName', func.list);
 server.post('/:dbName', func.save);
