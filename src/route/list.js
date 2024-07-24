@@ -1,7 +1,9 @@
 import { setInputsObj } from '../db.js';
 
 export function list (request, reply) {
-  const { dbs, dbName, tableName, id } = setInputsObj(request);
+  const { dbs, dbName, tableName } = setInputsObj(request);
+
+  const id = request.query.id;
 
   if (!(id >= 1 && id <= dbs[dbName][tableName].length)) {
     if (!id) {

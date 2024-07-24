@@ -11,9 +11,8 @@ const dbs = {
 }
 
 export function setInputsObj (request) {
-  const {dbName, tableName} = request.params;
+  const { dbName, tableName, id } = request.params;
 
-  const id = request.query.id;
 
   const inputs = {
     dbs,
