@@ -8,9 +8,9 @@ const server = fastify({ logger: true  });
 server.get('/', func.list);
 server.get('/:dbName', func.list);
 server.get('/:dbName/:tableName', func.list);
-server.post('/:dbName', func.save);
-server.put('/:dbName/:id', func.edit);
-server.delete('/:dbName/:id', func.drop);
+server.post('/:dbName/:tableName', func.save);
+server.put('/:dbName/:tableName/:id', func.edit);
+server.delete('/:dbName/:tableName/:id', func.drop);
 
 // Inicia o servidor Fastify na porta 3000 e no host '0.0.0.0'.
 server.listen({

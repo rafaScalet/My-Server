@@ -1,11 +1,16 @@
-import setDb from '../db.js';
+import { setInputsObj } from '../db.js';
 
 export function save (request, reply) {
-  const table = setDb(request); // Obtém a referência ao array de dados correspondente ao arquivo.
+  const { dbs, dbName, tableName } = setInputsObj(request);
 
-  const data = request.body; // Obtém os dados enviados na requisição.
+  const db =  dbs[dbName][tableName];
 
-  table.push(data); // Adiciona os dados ao array de vacina.
+  const data = request.body
 
-  reply.status(201).send(); // Retorna um status 201 (Created) para indicar que os dados foram criados.
+  if(dbs[dbName].hasOwnProperty(tableName)) {
+    db.push(data);
+    reply.status(201).send();
+  } else {
+    reply.status(404).send();
+  }
 }
