@@ -1,4 +1,4 @@
-import { setInputsObj } from '../db.js';
+import { setInputsObj } from './../db/db-config.js';
 
 export function save (request, reply) {
   const { dbs, dbName, tableName } = setInputsObj(request);
